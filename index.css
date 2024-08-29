@@ -28,6 +28,7 @@
 
 .grid-item{
     background-color: #8f9794;
+    cursor: pointer;
     height: 120px;
     width: 120px;
     text-align: center;

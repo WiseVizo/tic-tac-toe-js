@@ -3,15 +3,128 @@ const player2Symbol = "X"
 let isPlayer1sTurn = true
 
 
-const onDivClick = (div)=> {
-    console.log("clicked");
+const onDivClick = (div, divs)=> {
+    if (div.innerHTML) return 0;
     if (isPlayer1sTurn){
         div.innerHTML = player1Symbol
     }else{
         div.innerHTML = player2Symbol
     }
     isPlayer1sTurn = !isPlayer1sTurn
+    readGameState(divs)
+    checkWins()
+
 }
+const resetBoard = (divs)=>{
+    divs.forEach(function(div, index){
+        div.innerHTML = ""
+        GAME_STATE[index] = ""
+    })
+    isPlayer1sTurn = true
+
+    wins = [rowWins, colWins, diagonalWins]
+    wins.forEach(function(win, index){
+        win.forEach(function(list, index){
+            for(let x=0; x<3; x++){
+                list[x] = 0
+            }
+        })
+    })
+    
+}
+
+const fillBoard = (rowsData, divs)=>{
+    divs.forEach(function(div, index){
+        div.innerHTML = rowsData[index]
+    })
+}
+
+const readGameState = (divs)=>{
+    divs.forEach(function(div, index){
+        GAME_STATE[index] = div.innerHTML
+    })
+}
+
+const checkWins = ()=>{
+    const rows = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+    const cols = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
+    const diagonals = [[0, 4, 8], [2, 4, 6]]
+    
+    rows.forEach(function(row, index){   
+        for(let x = 0; x<3; x++){
+            if (GAME_STATE[row[x]]==player1Symbol){
+                rowWins[index][x] = 1
+            }
+            if (GAME_STATE[row[x]]==player2Symbol){
+                rowWins[index][x] = -1
+            }
+        }
+    })
+    cols.forEach(function(col, index){   
+        for(let x = 0; x<3; x++){
+            if (GAME_STATE[col[x]]==player1Symbol){
+                colWins[index][x] = 1
+            }
+            if (GAME_STATE[col[x]]==player2Symbol){
+                colWins[index][x] = -1
+            }
+            
+        }
+    })
+    diagonals.forEach(function(diagonal, index){   
+        for(let x = 0; x<3; x++){
+            if (GAME_STATE[diagonal[x]]==player1Symbol){
+                diagonalWins[index][x] = 1
+            }
+            if (GAME_STATE[diagonal[x]]==player2Symbol){
+                diagonalWins[index][x] = -1
+            }
+        }
+    })
+
+    
+    rowWins.forEach(function(rows, index){
+        let sum = 0
+        rows.forEach(function(item, _){
+            sum = sum + item
+        })
+        console.log(sum)
+        if(sum==-3){
+            console.log("X won")
+        }
+        if(sum==3){
+            console.log("O won")
+        }
+    })
+    colWins.forEach(function(cols, index){
+        let sum = 0
+        cols.forEach(function(item, _){
+            sum = sum + item
+        })
+        console.log(sum)
+        if(sum==-3){
+            console.log("X won")
+        }
+        if(sum==3){
+            console.log("O won")
+        }
+    })
+    diagonalWins.forEach(function(digonals, index){
+        let sum = 0
+        digonals.forEach(function(item, _){
+            sum = sum + item
+        })
+        console.log(sum)
+        if(sum==-3){
+            console.log("X won")
+        }
+        if(sum==3){
+            console.log("O won")
+        }
+    })
+
+}
+
 
 const div1 = document.getElementById("div1");
 const div2 = document.getElementById("div2");
@@ -27,15 +140,17 @@ const div9 = document.getElementById("div9");
 const divs = [div1, div2, div3, div4, div5, div6, div7, div8, div9]
 
 divs.forEach(function(div, index) {
-    div.addEventListener("click", ()=>{onDivClick(div)});
+    div.addEventListener("click", ()=>{onDivClick(div, divs)});
 });
-
-const resetBoard = (divs)=>{
-    divs.forEach(function(div, index){
-        div.innerHTML = ""
-    })
-    isPlayer1sTurn = true
-}
 
 const resetBtn = document.getElementById("reset-btn")
 resetBtn.addEventListener("click", ()=>{resetBoard(divs)})
+
+const GAME_STATE = ["X", "", "O", "X", "", "", "", "", ""]
+
+const rowWins = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
+const colWins = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+
+
+const diagonalWins = [[0, 0, 0], [0, 0, 0]]
