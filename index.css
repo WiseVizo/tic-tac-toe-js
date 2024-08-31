@@ -1,3 +1,8 @@
+:root{
+    --line-color: #d5431a;
+}
+
+
 *{
     margin: 0;
     padding: 0;
@@ -24,6 +29,7 @@
     gap: 12px;
     border: black solid 5px;
     padding: 4px;
+    position: relative;
 }
 
 .grid-item{
@@ -63,6 +69,66 @@
     transform: scale(1.05);
 }
 
-.svg-box{
+.horizontal-line{
     position: absolute;
+    left: 4px;
+    width: 98%;
+    height: 2px;
+    background-color: var(--line-color);
+    transform: translateY(-50%);
 }
+
+.hz-line-0 {
+    top: 15%;
+}
+.hz-line-1{
+    top: 50%;
+}
+.hz-line-2{
+    top: 84%;
+}
+
+.vertical-line {
+    position: absolute;
+    top: 4px;
+    width: 2px;
+    height: 98%;
+    background-color: var(--line-color);
+    transform: translateX(-50%);
+}
+
+.vt-line-0{
+    left: 16%;
+}
+
+.vt-line-1{
+    left: 50%;
+}
+
+.vt-line-2{
+    left: 84%;
+}
+
+.diagonal-line{
+    position: absolute;
+    background-color:  var(--line-color);
+}
+
+.dg-line-0{
+    width: 137%;
+    height: 2px;
+    top: 68%;
+    transform: rotate(45deg) translateX(-104px);
+}
+
+.dg-line-1{
+    width: 137%;
+    height: 2px;
+    top: 31%;
+    transform: rotate(135deg) translateX(103px);
+}
+
+.hide{
+    display: none;
+}
+

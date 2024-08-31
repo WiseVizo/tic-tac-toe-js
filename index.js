@@ -22,13 +22,28 @@ const resetBoard = (divs)=>{
     })
     isPlayer1sTurn = true
 
-    wins = [rowWins, colWins, diagonalWins]
+    const wins = [rowWins, colWins, diagonalWins]
     wins.forEach(function(win, index){
         win.forEach(function(list, index){
             for(let x=0; x<3; x++){
                 list[x] = 0
             }
         })
+    })
+
+    const lines = ["row", "col", "dg"]
+    lines.forEach(function(line, _){
+        if(line == "dg"){
+            for(let x=0; x<2; x++){
+                let htmlLine = document.getElementById(`${line}-${x}`)
+                htmlLine.classList.add("hide")
+            }
+        }else{
+            for(let x=0; x<3; x++){
+                let htmlLine = document.getElementById(`${line}-${x}`)
+                htmlLine.classList.add("hide")
+            }
+        }
     })
     
 }
@@ -115,24 +130,18 @@ const checkWins = ()=>{
             sum = sum + item
         })
         if(sum==-3){
-            Win("diagonal", index, player2Symbol)
+            Win("dg", index, player2Symbol)
         }
         if(sum==3){
-            Win("diagonal", index, player1Symbol)
+            Win("dg", index, player1Symbol)
         }
     })
 
 }
 
 const Win = (type, index, playersymbol)=>{
-    console.log(type, index, playersymbol)
-    const gameGrid = document.getElementById("game-grid")
-    const svgBox = document.getElementById("svg-box")
-    const gridRect = gameGrid.getBoundingClientRect()
-    svgBox.style.left = `${gridRect.left}px`;
-    console.log(`${gridRect.left}px`)
-    svgBox.style.top = `${gridRect.top}px`;
-    console.log(`${gridRect.top}px`)
+    const line = document.getElementById(`${type}-${index}`)
+    line.classList.remove("hide")
 }
 
 
