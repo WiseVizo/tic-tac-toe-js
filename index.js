@@ -88,12 +88,12 @@ const checkWins = ()=>{
         rows.forEach(function(item, _){
             sum = sum + item
         })
-        console.log(sum)
+
         if(sum==-3){
-            console.log("X won")
+            Win("row", index, player2Symbol)
         }
         if(sum==3){
-            console.log("O won")
+            Win("row", index, player1Symbol)
         }
     })
     colWins.forEach(function(cols, index){
@@ -101,12 +101,12 @@ const checkWins = ()=>{
         cols.forEach(function(item, _){
             sum = sum + item
         })
-        console.log(sum)
+ 
         if(sum==-3){
-            console.log("X won")
+            Win("col", index, player2Symbol)
         }
         if(sum==3){
-            console.log("O won")
+            Win("col", index, player1Symbol)
         }
     })
     diagonalWins.forEach(function(digonals, index){
@@ -114,15 +114,25 @@ const checkWins = ()=>{
         digonals.forEach(function(item, _){
             sum = sum + item
         })
-        console.log(sum)
         if(sum==-3){
-            console.log("X won")
+            Win("diagonal", index, player2Symbol)
         }
         if(sum==3){
-            console.log("O won")
+            Win("diagonal", index, player1Symbol)
         }
     })
 
+}
+
+const Win = (type, index, playersymbol)=>{
+    console.log(type, index, playersymbol)
+    const gameGrid = document.getElementById("game-grid")
+    const svgBox = document.getElementById("svg-box")
+    const gridRect = gameGrid.getBoundingClientRect()
+    svgBox.style.left = `${gridRect.left}px`;
+    console.log(`${gridRect.left}px`)
+    svgBox.style.top = `${gridRect.top}px`;
+    console.log(`${gridRect.top}px`)
 }
 
 
@@ -154,3 +164,5 @@ const colWins = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
 
 const diagonalWins = [[0, 0, 0], [0, 0, 0]]
+
+
