@@ -132,3 +132,54 @@
     display: none;
 }
 
+#pop-up{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    padding-top: 154px;
+}
+
+.hide-pop-up{
+    z-index: -100;
+    opacity: 0;
+}
+
+.show-pop-up{
+    z-index: 100;
+    opacity: 1;
+}
+
+#pop-up-msg{
+    background-color: #00000070;
+    color: aliceblue;
+    height: 300px;
+    width: 560px;
+    text-align: center;
+    padding: 84px;
+}
+
+#pop-up-msg>p{
+    margin-bottom: 20px;
+    font-size: 56px;
+}
+
+#pop-up-msg>button{
+    height: 60px;
+    width: 120px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7fb877; 
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#pop-up-msg>button:hover{
+    background-color: #86cf7c;
+    transform: scale(1.05);
+}

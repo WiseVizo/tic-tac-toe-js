@@ -45,6 +45,10 @@ const resetBoard = (divs)=>{
             }
         }
     })
+
+    const popUp = document.getElementById("pop-up")
+    popUp.classList.remove("show-pop-up")
+    popUp.classList.add("hide-pop-up")
     
 }
 
@@ -142,6 +146,12 @@ const checkWins = ()=>{
 const Win = (type, index, playersymbol)=>{
     const line = document.getElementById(`${type}-${index}`)
     line.classList.remove("hide")
+    const popUp = document.getElementById("pop-up")
+    popUp.classList.replace("hide-pop-up", "show-pop-up")
+    const popUpMsg = document.getElementById("pop-up-msg-p")
+    popUpMsg.innerHTML = `${playersymbol} won`
+    const closeBtn = document.getElementById("pop-up-btn")
+    closeBtn.addEventListener("click", ()=>{resetBoard(divs)})
 }
 
 
